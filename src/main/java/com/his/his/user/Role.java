@@ -40,7 +40,8 @@ public enum Role {
                   DOCTOR_CREATE,
                   PATIENT_READ,
                   PATIENT_UPDATE,
-                  PATIENT_CREATE
+                  PATIENT_CREATE,
+                  NURSE_READ
           )
   ),
   PHARAMACIST(

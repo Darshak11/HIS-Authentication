@@ -45,9 +45,20 @@ public class HisApplication implements CommandLineRunner {
 		employee1.setRole(ADMIN);
 		employeeRepository.save(employee1);
 
+		User desk=new User();
+		desk.setDateOfBirth("12/03/12");
+		desk.setName("Darshak");
+		desk.setLastCheckIn("1:02");
+		desk.setPassword(encoder.encode("1234"));
+		desk.setEmployeeStatus(User.EmployeeStatus.CHECKED_OUT);
+		desk.setRole(DESK);
+		employeeRepository.save(desk);
+
+
 
 		System.out.println("Id for Doctor is "+employee.getEmployeeId().toString());
 		System.out.println("Id for ADMIN is "+employee1.getEmployeeId().toString());
+		System.out.println("Id for ADMISSION DESK is "+desk.getEmployeeId().toString());
 	}
 
 	
