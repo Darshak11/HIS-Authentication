@@ -4,39 +4,26 @@ import java.util.Collection;
 import java.util.List;
 
 
+import jakarta.persistence.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.his.his.token.Token;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@JsonIgnoreProperties({"password", "role", "tokens"})
 @Table(name = "users")
 public class User implements UserDetails
 {
@@ -44,10 +31,19 @@ public class User implements UserDetails
         CHECKED_IN, CHECKED_OUT
     }
 
+    public enum EmployeeType{
+        NURSE,
+        DOCTOR,
+        HEAD_NURSE,
+        PHARMACIST,
+        ADMIN,
+        ADMISSION_DESK
+    }
+
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column( updatable = false, nullable = false )
+    @Column(name = "employeeId", updatable = false, nullable = false )
     private UUID employeeId; 
     
     @Column(name = "Name", nullable = false )
@@ -57,7 +53,6 @@ public class User implements UserDetails
     private String dateOfBirth;
 
     @Column(name="Password", nullable = false)
-    @JsonIgnore
     private String password;
 
     @Column(name = "LastCheckIn" )
@@ -67,11 +62,12 @@ public class User implements UserDetails
     @Enumerated(EnumType.STRING)
     private EmployeeStatus employeeStatus;
 
-    @JsonIgnore
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonIgnore
+    @Enumerated(EnumType.STRING)
+    private EmployeeType employeeType;
+
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Token> tokens;

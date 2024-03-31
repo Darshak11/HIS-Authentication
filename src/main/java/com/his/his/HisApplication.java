@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.his.his.user.User;
 import com.his.his.user.UserRepository;
+import com.his.his.user.User.EmployeeType;
 
 @SpringBootApplication
 public class HisApplication implements CommandLineRunner {
@@ -34,6 +35,7 @@ public class HisApplication implements CommandLineRunner {
 		employee.setPassword(encoder.encode("1234"));
 		employee.setEmployeeStatus(User.EmployeeStatus.CHECKED_IN);
 		employee.setRole(DOCTOR);
+		employee.setEmployeeType(EmployeeType.DOCTOR);
 		employeeRepository.save(employee);
 		
 		User employee1=new User();
@@ -43,6 +45,7 @@ public class HisApplication implements CommandLineRunner {
 		employee1.setPassword(encoder.encode("1234"));
 		employee1.setEmployeeStatus(User.EmployeeStatus.CHECKED_OUT);
 		employee1.setRole(ADMIN);
+		employee1.setEmployeeType(EmployeeType.ADMIN);
 		employeeRepository.save(employee1);
 
 		User desk=new User();
@@ -52,6 +55,7 @@ public class HisApplication implements CommandLineRunner {
 		desk.setPassword(encoder.encode("1234"));
 		desk.setEmployeeStatus(User.EmployeeStatus.CHECKED_OUT);
 		desk.setRole(DESK);
+		desk.setEmployeeType(EmployeeType.ADMISSION_DESK);
 		employeeRepository.save(desk);
 
 
