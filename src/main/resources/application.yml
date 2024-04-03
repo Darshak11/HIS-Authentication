@@ -27,3 +27,14 @@ application:
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
+
+
+# Jasypt Configuration
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    password: HELLO
+
+aes:
+  encryption:
+    key: "this-is-test-key"

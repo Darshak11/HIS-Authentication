@@ -2,6 +2,7 @@ package com.his.his.config;
 
 import java.util.UUID;
 
+import org.jasypt.properties.EncryptableProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -8,6 +8,9 @@ import jakarta.persistence.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.his.his.converter.AesEncryptor;
+import com.his.his.converter.ObjectCryptoConverter;
+import com.his.his.converter.StringCryptoConverter;
 import com.his.his.token.Token;
 
 import lombok.AllArgsConstructor;
@@ -46,7 +49,8 @@ public class User implements UserDetails
     @Column(name = "employeeId", updatable = false, nullable = false )
     private UUID employeeId; 
     
-    @Column(name = "Name", nullable = false )
+    @Convert(converter = ObjectCryptoConverter.class) 
+    @Column(name = "Name", nullable = false)
     private String name;
 
     @Column(name = "DateOfBirth", nullable = false )
@@ -55,6 +59,7 @@ public class User implements UserDetails
     @Column(name="Password", nullable = false)
     private String password;
 
+    @Convert(converter = ObjectCryptoConverter.class) 
     @Column(name = "LastCheckIn" )
     private String lastCheckIn;
 

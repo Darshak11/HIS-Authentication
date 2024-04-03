@@ -75,6 +75,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Jasypt Encryption Library -->
+        <dependency> 
+            <groupId>org.jasypt</groupId> 
+            <artifactId>jasypt</artifactId> 
+            <version>1.9.3</version> 
+        </dependency> 
 	</dependencies>
 
 	<build>
