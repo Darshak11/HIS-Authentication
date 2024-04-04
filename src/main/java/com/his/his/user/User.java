@@ -49,7 +49,7 @@ public class User implements UserDetails
     @Column(name = "employeeId", updatable = false, nullable = false )
     private UUID employeeId; 
     
-    @Convert(converter = ObjectCryptoConverter.class) 
+    @Convert(converter = StringCryptoConverter.class)
     @Column(name = "Name", nullable = false)
     private String name;
 
@@ -59,7 +59,7 @@ public class User implements UserDetails
     @Column(name="Password", nullable = false)
     private String password;
 
-    @Convert(converter = ObjectCryptoConverter.class) 
+    @Convert(converter = StringCryptoConverter.class)
     @Column(name = "LastCheckIn" )
     private String lastCheckIn;
 

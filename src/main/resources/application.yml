@@ -37,4 +37,4 @@ jasypt:
 
 aes:
   encryption:
-    key: "this-is-test-key"
+    key: this-is-test-key
