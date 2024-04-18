@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import com.his.his.user.UserRepository;
 import com.his.his.user.Role;
 import com.his.his.user.User;
+import com.his.his.PublicPrivateMapping.PublicPrivateService;
 import com.his.his.config.JwtService;
 import com.his.his.token.Token;
 import com.his.his.token.TokenRepository;
@@ -24,11 +25,13 @@ public class AuthenticationService
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final TokenRepository tokenRepository;
+    private final PublicPrivateService publicPrivateService;
 
     public AuthenticationResponse register(RegisterRequest request)
     {
         var user = User.builder().name(request.getUsername()).dateOfBirth(request.getDateOfBirth()).employeeStatus(request.getEmployeeStatus()).lastCheckIn(request.getLastCheckIn()).role(request.getRole()).password(passwordEncoder.encode(request.getPassword())).build();
         var savedUser=userRepository.save(user);
+        publicPrivateService.savePublicPrivateId(savedUser.getEmployeeId(),savedUser.getEmployeeType().toString());
         System.out.println(user.getEmployeeId().toString());
         var jwtToken = jwtService.generateToken(user);
         saveUserToken(savedUser,jwtToken);
@@ -36,6 +39,7 @@ public class AuthenticationService
     }
     public AuthenticationResponse authenticate(AuthenticationRequest request)
     {
+        
         String x=request.getUuid();
         String y=request.getPassword();
         authenticationManager.authenticate(

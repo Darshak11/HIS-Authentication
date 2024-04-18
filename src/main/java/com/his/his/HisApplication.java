@@ -10,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.his.his.PublicPrivateMapping.PublicPrivateService;
+import com.his.his.auth.AuthenticationService;
 import com.his.his.user.User;
 import com.his.his.user.UserRepository;
 import com.his.his.user.User.EmployeeType;
@@ -24,6 +26,9 @@ public class HisApplication implements CommandLineRunner {
 	@Autowired
 	private  UserRepository employeeRepository;
 
+	@Autowired
+	private PublicPrivateService publicPrivateService;
+
 	@Override
 	public void run(String... args) throws Exception {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -37,6 +42,7 @@ public class HisApplication implements CommandLineRunner {
 		employee.setRole(DOCTOR);
 		employee.setEmployeeType(EmployeeType.DOCTOR);
 		employeeRepository.save(employee);
+		publicPrivateService.savePublicPrivateId(employee.getEmployeeId(),employee.getEmployeeType().toString());
 		
 		User employee1=new User();
 		employee1.setDateOfBirth("12/03/12");
@@ -47,6 +53,7 @@ public class HisApplication implements CommandLineRunner {
 		employee1.setRole(ADMIN);
 		employee1.setEmployeeType(EmployeeType.ADMIN);
 		employeeRepository.save(employee1);
+		publicPrivateService.savePublicPrivateId(employee1.getEmployeeId(),employee1.getEmployeeType().toString());
 
 		User desk=new User();
 		desk.setDateOfBirth("12/03/12");
@@ -57,12 +64,12 @@ public class HisApplication implements CommandLineRunner {
 		desk.setRole(DESK);
 		desk.setEmployeeType(EmployeeType.ADMISSION_DESK);
 		employeeRepository.save(desk);
+		publicPrivateService.savePublicPrivateId(desk.getEmployeeId(),desk.getEmployeeType().toString());
 
 
-
-		System.out.println("Id for Doctor is "+employee.getEmployeeId().toString());
-		System.out.println("Id for ADMIN is "+employee1.getEmployeeId().toString());
-		System.out.println("Id for ADMISSION DESK is "+desk.getEmployeeId().toString());
+		System.out.println("Id for Doctor is "+publicPrivateService.publicIdByPrivateId(employee.getEmployeeId()));
+		System.out.println("Id for ADMIN is "+publicPrivateService.publicIdByPrivateId(employee1.getEmployeeId()));
+		System.out.println("Id for ADMISSION DESK is "+publicPrivateService.publicIdByPrivateId(desk.getEmployeeId()));
 	}
 
 	
