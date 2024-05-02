@@ -49,7 +49,7 @@ public class HisApplication implements CommandLineRunner {
 		employee1.setName("Darshak");
 		employee1.setLastCheckIn("1:02");
 		employee1.setPassword(encoder.encode("1234"));
-		employee1.setEmployeeStatus(User.EmployeeStatus.DELETED);
+		employee1.setEmployeeStatus(User.EmployeeStatus.CHECKED_IN);
 		employee1.setRole(ADMIN);
 		employee1.setEmployeeType(EmployeeType.ADMIN);
 		employeeRepository.save(employee1);
