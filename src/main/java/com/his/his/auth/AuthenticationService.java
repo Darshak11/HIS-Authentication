@@ -62,4 +62,9 @@ public class AuthenticationService
         var token=Token.builder().user(user).token(jwtToken).tokenType(TokenType.BEARER).expired(false).revoked(false).build();
         tokenRepository.save(token);
     }
+    public boolean isEmployeeActive(String uuid) {
+        UUID uuid1=publicPrivateService.privateIdByPublicId(uuid);
+        User user = userRepository.findByEmployeeId(uuid1).orElse(null);
+        return user != null && !user.getEmployeeStatus().toString().equalsIgnoreCase("deleted");
+    }
 }

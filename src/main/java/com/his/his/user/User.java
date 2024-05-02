@@ -31,7 +31,7 @@ import org.springframework.security.core.GrantedAuthority;
 public class User implements UserDetails
 {
     public enum EmployeeStatus {
-        CHECKED_IN, CHECKED_OUT
+        CHECKED_IN, CHECKED_OUT, DELETED
     }
 
     public enum EmployeeType{

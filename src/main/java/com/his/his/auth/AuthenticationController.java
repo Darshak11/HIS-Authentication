@@ -28,6 +28,7 @@ public class AuthenticationController
     }
 
     @PostMapping("/authenticate")
+    @PreAuthorize("@authenticationService.isEmployeeActive(#request.uuid)")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request)
     {
         request.setUuid(publicPrivateService.privateIdByPublicId(request.getUuid()).toString());
