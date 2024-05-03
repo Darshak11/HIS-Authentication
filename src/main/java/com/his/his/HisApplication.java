@@ -41,6 +41,7 @@ public class HisApplication implements CommandLineRunner {
 		employee.setEmployeeStatus(User.EmployeeStatus.CHECKED_IN);
 		employee.setRole(DOCTOR);
 		employee.setEmployeeType(EmployeeType.DOCTOR);
+		employee.setEmail("kemekm");
 		employeeRepository.save(employee);
 		publicPrivateService.savePublicPrivateId(employee.getEmployeeId(),employee.getEmployeeType().toString());
 		
@@ -52,6 +53,7 @@ public class HisApplication implements CommandLineRunner {
 		employee1.setEmployeeStatus(User.EmployeeStatus.CHECKED_IN);
 		employee1.setRole(ADMIN);
 		employee1.setEmployeeType(EmployeeType.ADMIN);
+		employee.setEmail("kemekm");
 		employeeRepository.save(employee1);
 		publicPrivateService.savePublicPrivateId(employee1.getEmployeeId(),employee1.getEmployeeType().toString());
 
@@ -63,6 +65,7 @@ public class HisApplication implements CommandLineRunner {
 		desk.setEmployeeStatus(User.EmployeeStatus.CHECKED_OUT);
 		desk.setRole(DESK);
 		desk.setEmployeeType(EmployeeType.ADMISSION_DESK);
+		employee.setEmail("kemekm");
 		employeeRepository.save(desk);
 		publicPrivateService.savePublicPrivateId(desk.getEmployeeId(),desk.getEmployeeType().toString());
 

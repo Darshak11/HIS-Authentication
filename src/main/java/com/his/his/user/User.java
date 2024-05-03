@@ -50,6 +50,10 @@ public class User implements UserDetails
     private UUID employeeId; 
     
     @Convert(converter = StringCryptoConverter.class)
+    @Column(name = "Email", nullable = true)
+    private String email;
+
+    @Convert(converter = StringCryptoConverter.class)
     @Column(name = "Name", nullable = false)
     private String name;
 
