@@ -62,7 +62,7 @@ public class HisApplication implements CommandLineRunner {
 		desk.setName("Darshak");
 		desk.setLastCheckIn("1:02");
 		desk.setPassword(encoder.encode("1234"));
-		desk.setEmployeeStatus(User.EmployeeStatus.CHECKED_OUT);
+		desk.setEmployeeStatus(User.EmployeeStatus.DELETED);
 		desk.setRole(DESK);
 		desk.setEmployeeType(EmployeeType.ADMISSION_DESK);
 		employee.setEmail("kemekm");

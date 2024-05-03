@@ -65,6 +65,6 @@ public class AuthenticationService
     public boolean isEmployeeActive(String uuid) {
         UUID uuid1=publicPrivateService.privateIdByPublicId(uuid);
         User user = userRepository.findByEmployeeId(uuid1).orElse(null);
-        return user != null && !user.getEmployeeStatus().toString().equalsIgnoreCase("deleted");
+        return user != null && !user.getEmployeeStatus().toString().equalsIgnoreCase("deleted") && !user.getEmployeeStatus().toString().equalsIgnoreCase("checked_out");
     }
 }
